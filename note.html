@@ -19,17 +19,22 @@
       border-radius: 10px;
     }
 
-    h1 {
-      margin-top: 0;
-    }
-
     button {
-      margin-top: 20px;
+      margin-top: 10px;
       padding: 10px;
-      background: #38bdf8;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+    }
+
+    .delete-btn {
+      background: red;
+      color: white;
+    }
+
+    .back-btn {
+      background: #38bdf8;
+      margin-right: 10px;
     }
   </style>
 </head>
@@ -41,7 +46,8 @@
   <p id="noteContent"></p>
 </div>
 
-<button onclick="goBack()">Back</button>
+<button class="back-btn" onclick="goBack()">Back</button>
+<button class="delete-btn" onclick="deleteCurrentNote()">Delete</button>
 
 <script>
   let notes = JSON.parse(localStorage.getItem("notes")) || [];
@@ -57,6 +63,12 @@
   }
 
   function goBack() {
+    window.location.href = "index.html";
+  }
+
+  function deleteCurrentNote() {
+    notes.splice(index, 1);
+    localStorage.setItem("notes", JSON.stringify(notes));
     window.location.href = "index.html";
   }
 </script>
