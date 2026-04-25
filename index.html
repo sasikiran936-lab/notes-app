@@ -23,11 +23,20 @@
     }
 
     button {
-      padding: 10px;
-      background: #38bdf8;
+      padding: 8px 12px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      margin: 5px;
+    }
+
+    .add-btn {
+      background: #38bdf8;
+    }
+
+    .delete-btn {
+      background: red;
+      color: white;
     }
 
     .note {
@@ -37,12 +46,11 @@
       width: 80%;
       border-radius: 8px;
       text-align: left;
-      cursor: pointer;
-      transition: 0.2s;
     }
 
-    .note:hover {
-      transform: scale(1.02);
+    .note h3 {
+      cursor: pointer;
+      margin: 0;
     }
   </style>
 </head>
@@ -54,7 +62,7 @@
 <input id="title" placeholder="Enter title">
 <textarea id="content" placeholder="Write your note..."></textarea>
 <br>
-<button onclick="addNote()">Add Note</button>
+<button class="add-btn" onclick="addNote()">Add Note</button>
 
 <div id="notesList"></div>
 
@@ -75,6 +83,7 @@
 
       div.innerHTML = `
         <h3 onclick="openNote(${index})">${note.title}</h3>
+        <button class="delete-btn" onclick="deleteNote(${index})">Delete</button>
       `;
 
       list.appendChild(div);
@@ -96,6 +105,12 @@
 
     document.getElementById("title").value = "";
     document.getElementById("content").value = "";
+  }
+
+  function deleteNote(index) {
+    notes.splice(index, 1);
+    saveNotes();
+    renderNotes();
   }
 
   function openNote(index) {
