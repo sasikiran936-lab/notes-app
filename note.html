@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Note</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      padding: 20px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      background: #38bdf8;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1 id="noteTitle"></h1>
+  <p id="noteContent"></p>
+</div>
+
+<button onclick="goBack()">Back</button>
+
+<script>
+  let notes = JSON.parse(localStorage.getItem("notes")) || [];
+  let index = localStorage.getItem("currentNote");
+
+  let note = notes[index];
+
+  if (note) {
+    document.getElementById("noteTitle").innerText = note.title;
+    document.getElementById("noteContent").innerText = note.content;
+  } else {
+    document.body.innerHTML = "<h2>Note not found</h2>";
+  }
+
+  function goBack() {
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>
